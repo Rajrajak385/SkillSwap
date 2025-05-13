@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Users - Skill Swap</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Skill Swap</a>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html" class="active">Browse</a></li>
+                    <li class="auth-only"><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons desktop-only">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="logged-out-buttons">
+                    <a href="login.html" class="btn btn-outline">Log in</a>
+                    <a href="signup.html" class="btn btn-primary">Sign up</a>
+                </div>
+                <div class="logged-in-buttons">
+                    <div class="user-menu">
+                        <button class="btn btn-outline user-menu-button">
+                            <div class="avatar"></div>
+                            <span class="username"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="dashboard.html">Dashboard</a>
+                            <a href="#" id="logout-button" class="text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li class="auth-only"><a href="dashboard.html">Dashboard</a></li>
+                <li class="mobile-auth">
+                    <div class="logged-out-buttons">
+                        <a href="login.html" class="btn btn-outline btn-block">Log in</a>
+                        <a href="signup.html" class="btn btn-primary btn-block">Sign up</a>
+                    </div>
+                    <div class="logged-in-buttons">
+                        <div class="user-info">
+                            <div class="avatar"></div>
+                            <span class="username"></span>
+                        </div>
+                        <a href="#" id="mobile-logout-button" class="btn btn-outline btn-block text-danger">
+                            <i class="fas fa-sign-out-alt"></i> Log out
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="browse-container">
+            <div class="browse-header">
+                <h1>Browse Users</h1>
+                <div class="browse-actions">
+                    <button id="generate-sample-users" class="btn btn-outline">
+                        <i class="fas fa-users"></i> Generate Sample Users
+                    </button>
+                    <button id="find-matches" class="btn btn-primary auth-only">
+                        <i class="fas fa-exchange-alt"></i> Find My Matches
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search by name or skill...">
+                </div>
+
+                <div class="filter-box">
+                    <select id="skill-filter">
+                        <option value="">All skills</option>
+                        <!-- Skills will be populated by JavaScript -->
+                    </select>
+                </div>
+
+                <div class="filter-box">
+                    <select id="skill-type-filter">
+                        <option value="all">Teaching or Learning</option>
+                        <option value="teach">Teaching</option>
+                        <option value="learn">Learning</option>
+                    </select>
+                </div>
+
+                <div class="filter-box">
+                    <select id="sort-filter">
+                        <option value="relevance">Sort by Relevance</option>
+                        <option value="match">Sort by Match Score</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="skills-most">Most Skills</option>
+                        <option value="skills-least">Least Skills</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="match-summary auth-only" id="match-summary">
+                <!-- Match summary will be populated by JavaScript -->
+            </div>
+
+            <div class="users-grid" id="users-container">
+                <p class="loading-message">Loading users...</p>
+            </div>
+
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Message Modal -->
+    <div class="modal" id="message-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Message <span id="message-recipient">User</span></h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="message-text">Your Message</label>
+                    <textarea id="message-text" rows="5" placeholder="Hi! I noticed we have matching skills. Would you be interested in swapping knowledge?"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-cancel">Cancel</button>
+                <button class="btn btn-primary" id="send-message">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div class="modal" id="user-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>User Profile</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="user-details-content">
+                <!-- User details will be populated by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-cancel">Close</button>
+                <button class="btn btn-primary" id="contact-from-details">Contact</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <div class="toast-message">
+                <span class="toast-title">Success!</span>
+                <span class="toast-description">Your message has been sent.</span>
+            </div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/sample-users.js"></script>
+    <script src="js/browse.js"></script>
+</body>
+</html>

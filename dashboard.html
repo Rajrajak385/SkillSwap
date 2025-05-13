@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Skill Swap</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Skill Swap</a>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li class="auth-only"><a href="dashboard.html" class="active">Dashboard</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons desktop-only">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="logged-out-buttons">
+                    <a href="login.html" class="btn btn-outline">Log in</a>
+                    <a href="signup.html" class="btn btn-primary">Sign up</a>
+                </div>
+                <div class="logged-in-buttons">
+                    <div class="user-menu">
+                        <button class="btn btn-outline user-menu-button">
+                            <div class="avatar" id="header-avatar"></div>
+                            <span class="username"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="dashboard.html">Dashboard</a>
+                            <a href="#" id="logout-button" class="text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li class="auth-only"><a href="dashboard.html">Dashboard</a></li>
+                <li class="mobile-auth">
+                    <div class="logged-out-buttons">
+                        <a href="login.html" class="btn btn-outline btn-block">Log in</a>
+                        <a href="signup.html" class="btn btn-primary btn-block">Sign up</a>
+                    </div>
+                    <div class="logged-in-buttons">
+                        <div class="user-info">
+                            <div class="avatar"></div>
+                            <span class="username"></span>
+                        </div>
+                        <a href="#" id="mobile-logout-button" class="btn btn-outline btn-block text-danger">
+                            <i class="fas fa-sign-out-alt"></i> Log out
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="user-profile-summary">
+                    <div class="user-profile-avatar" id="profile-avatar"></div>
+                    <div class="user-profile-info">
+                        <h1>Welcome, <span id="user-name">User</span></h1>
+                        <p id="user-location"><i class="fas fa-map-marker-alt"></i> No location set</p>
+                        <p id="user-bio-preview" class="user-bio-preview">No bio added yet</p>
+                    </div>
+                </div>
+                <button id="edit-profile-btn" class="btn btn-outline">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="stat-content">
+                        <h3 id="teaching-count">0</h3>
+                        <p>Skills Teaching</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                    <div class="stat-content">
+                        <h3 id="learning-count">0</h3>
+                        <p>Skills Learning</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-content">
+                        <h3 id="matches-count">0</h3>
+                        <p>Potential Matches</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="skills">My Skills</button>
+                    <button class="tab-button" data-tab="matches">Potential Matches</button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Skills Tab -->
+                    <div class="tab-pane active" id="skills-tab">
+                        <div class="skills-grid">
+                            <!-- Skills I Can Teach -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Skills I Can Teach</h2>
+                                    <p>Share your expertise with others</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="skill-input-container">
+                                        <div class="skill-input-wrapper">
+                                            <input type="text" id="teach-skill-input" class="skill-input" placeholder="Add a skill you can teach...">
+                                            <div class="skill-suggestions" id="teach-skill-suggestions"></div>
+                                        </div>
+                                        <button id="add-teach-skill" class="btn btn-primary btn-icon">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="skill-tags" id="teach-skills-container">
+                                        <p class="empty-skills-message">No teaching skills added yet</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Skills I Want to Learn -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Skills I Want to Learn</h2>
+                                    <p>Discover new knowledge from others</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="skill-input-container">
+                                        <div class="skill-input-wrapper">
+                                            <input type="text" id="learn-skill-input" class="skill-input" placeholder="Add a skill you want to learn...">
+                                            <div class="skill-suggestions" id="learn-skill-suggestions"></div>
+                                        </div>
+                                        <button id="add-learn-skill" class="btn btn-primary btn-icon">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="skill-tags" id="learn-skills-container">
+                                        <p class="empty-skills-message">No learning skills added yet</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matches Tab -->
+                    <div class="tab-pane" id="matches-tab">
+                        <div id="matches-container">
+                            <p class="loading-message">Finding matches...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="edit-profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-profile-form">
+                    <div class="avatar-upload">
+                        <div class="avatar-preview">
+                            <div id="avatar-preview"></div>
+                        </div>
+                        <div class="avatar-options">
+                            <h4>Choose Avatar Color</h4>
+                            <div class="avatar-colors">
+                                <button type="button" class="avatar-color-option" data-color="#e0f2fe" style="background-color: #e0f2fe;"></button>
+                                <button type="button" class="avatar-color-option" data-color="#d1fae5" style="background-color: #d1fae5;"></button>
+                                <button type="button" class="avatar-color-option" data-color="#fee2e2" style="background-color: #fee2e2;"></button>
+                                <button type="button" class="avatar-color-option" data-color="#fef3c7" style="background-color: #fef3c7;"></button>
+                                <button type="button" class="avatar-color-option" data-color="#e0e7ff" style="background-color: #e0e7ff;"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-name">Full Name</label>
+                        <input type="text" id="edit-name" name="edit-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-email">Email</label>
+                        <input type="email" id="edit-email" name="edit-email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-location">Location</label>
+                        <input type="text" id="edit-location" name="edit-location" placeholder="City, Country">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-bio">Bio</label>
+                        <textarea id="edit-bio" name="edit-bio" rows="4" placeholder="Tell others about yourself, your interests, and your experience"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Social Media</label>
+                        <div class="social-media-inputs">
+                            <div class="social-input">
+                                <i class="fab fa-linkedin"></i>
+                                <input type="text" id="edit-linkedin" name="edit-linkedin" placeholder="LinkedIn username">
+                            </div>
+                            <div class="social-input">
+                                <i class="fab fa-github"></i>
+                                <input type="text" id="edit-github" name="edit-github" placeholder="GitHub username">
+                            </div>
+                            <div class="social-input">
+                                <i class="fab fa-twitter"></i>
+                                <input type="text" id="edit-twitter" name="edit-twitter" placeholder="Twitter username">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-availability">Availability</label>
+                        <select id="edit-availability" name="edit-availability">
+                            <option value="flexible">Flexible - Anytime</option>
+                            <option value="weekdays">Weekdays Only</option>
+                            <option value="weekends">Weekends Only</option>
+                            <option value="evenings">Evenings Only</option>
+                            <option value="limited">Limited Availability</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-cancel">Cancel</button>
+                <button class="btn btn-primary" id="save-profile">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div class="modal" id="message-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Message <span id="message-recipient">User</span></h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="message-text">Your Message</label>
+                    <textarea id="message-text" rows="5" placeholder="Hi! I noticed we have matching skills. Would you be interested in swapping knowledge?"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-cancel">Cancel</button>
+                <button class="btn btn-primary" id="send-message">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <div class="toast-message">
+                <span class="toast-title">Success!</span>
+                <span class="toast-description">Your profile has been updated.</span>
+            </div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/skill-input.js"></script>
+    <script src="js/sample-users.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

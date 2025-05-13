@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Skill Swap</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Skill Swap</a>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li class="auth-only"><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons desktop-only">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="logged-out-buttons">
+                    <a href="login.html" class="btn btn-outline">Log in</a>
+                    <a href="signup.html" class="btn btn-primary">Sign up</a>
+                </div>
+                <div class="logged-in-buttons">
+                    <div class="user-menu">
+                        <button class="btn btn-outline user-menu-button">
+                            <div class="avatar"></div>
+                            <span class="username"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="dashboard.html">Dashboard</a>
+                            <a href="#" id="logout-button" class="text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li class="auth-only"><a href="dashboard.html">Dashboard</a></li>
+                <li class="mobile-auth">
+                    <div class="logged-out-buttons">
+                        <a href="login.html" class="btn btn-outline btn-block">Log in</a>
+                        <a href="signup.html" class="btn btn-primary btn-block">Sign up</a>
+                    </div>
+                    <div class="logged-in-buttons">
+                        <div class="user-info">
+                            <div class="avatar"></div>
+                            <span class="username"></span>
+                        </div>
+                        <a href="#" id="mobile-logout-button" class="btn btn-outline btn-block text-danger">
+                            <i class="fas fa-sign-out-alt"></i> Log out
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Create an account</h2>
+                    <p>Join Skill Swap to start exchanging knowledge</p>
+                </div>
+                <div class="card-body">
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            <div class="error-message" id="name-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                                <button type="button" class="password-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="password-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" required>
+                            <div class="error-message" id="confirm-password-error"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <p>Already have an account? <a href="login.html">Log in</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <div class="toast-message">
+                <span class="toast-title">Success!</span>
+                <span class="toast-description">Your account has been created.</span>
+            </div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
